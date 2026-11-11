@@ -21,6 +21,12 @@ interface ProviderOptions {
   apiKey: string;
 }
 
+// Mandrill wants from_email / from_name separately; accept "Name <addr>" too.
+const parseFrom = (value: string) => {
+  const m = /^\s*"?([^"<]*?)"?\s*<([^>]+)>\s*$/.exec(value || '');
+  return m ? { from_email: m[2], ...(m[1] && { from_name: m[1] }) } : { from_email: value };
+};
+
 export = {
   init(providerOptions: ProviderOptions, settings: Settings) {
     const mailchimp = MailChimp(providerOptions.apiKey);
@@ -51,7 +57,7 @@ export = {
           }
 
           const message: MailChimp.MessagesMessage = {
-            from_email: from || settings.defaultFrom,
+            ...parseFrom(from || settings.defaultFrom),
             to: recipients,
             // replyTo: replyTo || settings.defaultReplyTo,
             subject,
