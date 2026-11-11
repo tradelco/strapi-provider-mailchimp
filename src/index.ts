@@ -67,7 +67,8 @@ export = {
           mailchimp.messages.send(body).then((response) => {
             //verify if response is  MailChimp.MessagesSendResponse[] or AxiosError<unknown, any>
             if (!Array.isArray(response) || response.length === 0) {
-              return reject(new Error('Invalid response from Mailchimp'));
+              const data = (response as { response?: { data?: { name?: string; message?: string } } })?.response?.data;
+              return reject(new Error(data ? `Mailchimp ${data.name}: ${data.message}` : 'Invalid response from Mailchimp'));
             }
             if (["sent", "queued", "scheduled"].includes(response[0].status)) {
               resolve();
