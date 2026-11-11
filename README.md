@@ -1,4 +1,4 @@
-# strapi-provider-mailchimp
+# @tradelco/strapi-provider-mailchimp
 
 ## Resources
 
@@ -15,10 +15,17 @@
 
 ```bash
 # using yarn
-yarn add strapi-provider-mailchimp
+yarn add @tradelco/strapi-provider-mailchimp
 
 # using npm
-npm install strapi-provider-mailchimp --save
+npm install @tradelco/strapi-provider-mailchimp --save
+```
+
+Published to GitHub Packages. Add to `.npmrc` (token with `read:packages`):
+
+```
+@tradelco:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_PACKAGES_TOKEN}
 ```
 
 ## Configuration
@@ -42,7 +49,7 @@ module.exports = ({ env }) => ({
   // ...
   email: {
     config: {
-      provider: 'mailchimp',
+      provider: '@tradelco/strapi-provider-mailchimp',
       providerOptions: {
         apiKey: env('MAILCHIMP_API_KEY'),
       },

@@ -1,5 +1,5 @@
 {
-  "name": "strapi-provider-mailchimp",
+  "name": "@tradelco/strapi-provider-mailchimp",
   "version": "1.0.0",
   "description": "Mailchimp Transactional (Mandrill) provider for the Strapi email plugin",
   "keywords": [
@@ -45,5 +45,8 @@
   },
   "engines": {
     "node": ">=18.0.0 <=22.x.x"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }
